@@ -1,0 +1,8 @@
+# ignore all files without extension and .o
+*
+!*.*
+!*/*
+*.o
+# ignore vscode and build
+.vscode
+build
