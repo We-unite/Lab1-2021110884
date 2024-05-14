@@ -1,4 +1,3 @@
-CXX = g++
 CFLAGS = -w -g
 
 all: main

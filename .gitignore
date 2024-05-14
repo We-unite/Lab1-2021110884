@@ -6,3 +6,5 @@
 # ignore vscode and build
 .vscode
 build
+# ignore push.sh
+push.sh
