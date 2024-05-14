@@ -4,6 +4,7 @@ all: main
 
 main: main.o graph.o
 	$(CXX) $(CFLAGS) -o main main.o graph.o
+	strip main
 
 main.o: main.cpp
 	$(CXX) $(CFLAGS) -c main.cpp

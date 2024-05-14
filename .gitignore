@@ -8,3 +8,6 @@
 build
 # ignore push.sh
 push.sh
+# ignore all swap files
+*~
+*.swp
