@@ -6,3 +6,6 @@
 # ignore vscode and build
 .vscode
 build
+# ignore all swap files
+*~
+*.swp
