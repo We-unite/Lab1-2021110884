@@ -87,6 +87,9 @@ void TextGraph::showGraph() {
     // to ensure the robustness of the program,
     // we use fork to open the browser
     if (fork() == 0) {
+        // 以/dev/null为标准输出和标准错误输出
+        freopen("/dev/null", "w", stdout);
+        freopen("/dev/null", "w", stderr);
         system("firefox output.svg");
         exit(0);
     }
