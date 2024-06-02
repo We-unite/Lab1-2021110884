@@ -32,7 +32,7 @@ class TextGraph {
     vector<string> queryBridgeWords(string word1, string word2);
     string generateNewText(string text);
     vector<string> calcShortestPath(string word1, string word2);
-    string randomWalk();
+    void randomWalk();
 };
 
 #endif

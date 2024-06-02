@@ -87,9 +87,10 @@ int main() {
                 }
                 cout << endl;
             }
+            sleep(1);
             break;
         case 6:
-            cout << "The random walk is: " << endl << tg->randomWalk() << endl;
+            tg->randomWalk();
             break;
         case 7:
             delete tg;

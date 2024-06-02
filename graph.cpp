@@ -1,5 +1,7 @@
 #include "graph.h"
+#include <signal.h>
 
+bool sigInt = false;
 static vector<string> breakIntoWords(string &text) {
     string word;
     istringstream iss;
@@ -177,7 +179,9 @@ vector<string> TextGraph::calcShortestPath(string word1, string word2) {
     return path;
 }
 
-string TextGraph::randomWalk() {
+void TextGraph::randomWalk() {
+    // 捕获sigint
+    signal(SIGINT, [](int) { sigInt = true; });
     srand(time(nullptr));
     int index = rand() % words.size();
     string word, next;
@@ -205,9 +209,25 @@ string TextGraph::randomWalk() {
         edges.push_back({word, next});
     }
 
-    string path;
-    for (const auto &edge : edges) {
-        path += edge.first + " ";
+    // setvbuf(stdout, nullptr, _IONBF, 0);
+    printf("\033[33mThe random walk is: \033[0m\n");
+    if (edges.empty()) {
+        printf("%s\n", word.c_str());
+        return;
     }
-    return path + (edges.empty() ? word : edges.back().second);
+    for (const auto &edge : edges) {
+        // 1.5s内如果出现sigint，直接返回（不要继续等待），否则继续
+        if (sigInt) {
+            cout << endl << "\033[31mInterrupted by SIGINT!\033[0m" << endl;
+            sigInt = false;
+            return;
+        }
+        cout << edge.first << " -> ";
+        fflush(stdout);
+        usleep(1000000);
+    }
+    cout << edges.back().second << endl;
+    // 停止捕获sigint
+    signal(SIGINT, SIG_DFL);
+    return;
 }
